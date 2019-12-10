@@ -121,10 +121,14 @@ to get the desired effect
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Փոփոխեք մանրամասները</p>
-                                </a>
+                                <form action="${pageContext.request.contextPath}/admin/ChangePassword" method="post" name="changPassword">
+                                       <a href="#" class="nav-link" onclick="document.changPassword.submit()">
+                                           <i class="far fa-circle nav-icon"></i>
+                                           <p>Փոփոխեք մանրամասները</p>
+                                       </a>
+                                    <input type="hidden" name="id" value="${requestScope.AdminId}">
+                                    <input type="hidden" name="sessionAdmin" value="${sessionScope.NameInSession}">
+                                </form>
                             </li>
                             <li class="nav-item">
                                 <a href="./index2.html" class="nav-link">

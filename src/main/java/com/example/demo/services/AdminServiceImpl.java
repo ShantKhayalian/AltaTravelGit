@@ -5,8 +5,9 @@ import com.example.demo.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class AdminServiceImpl implements AdminService {
 
@@ -35,5 +36,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<Admin> findAllAdminDetail() {
         return adminRepository.findAll();
+    }
+
+    @Override
+    public Optional<Admin> getAdminById(String id) {
+        return adminRepository.findById(id);
     }
 }
