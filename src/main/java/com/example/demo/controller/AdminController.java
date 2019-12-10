@@ -41,10 +41,9 @@ public class AdminController {
         return "/admin/fullDetail";
     }
 
-    @RequestMapping(value = "/admin/ChangePassword")
+    @PostMapping(value = "/admin/ChangePassword")
     public String changePass(@RequestParam String id, @RequestParam String sessionAdmin, Model model,HttpSession session) {
         Optional<Admin> admin = adminServiceimpl.getAdminById(id);
-
         if (admin != null && session.getAttribute("NameInSession").equals(sessionAdmin)) {
             model.addAttribute("adminFullList", admin);
             return "admin/ChangePassword";
@@ -64,11 +63,20 @@ public class AdminController {
             String sessionNameTracker = admin.getAdmin_username();
             session.setAttribute("NameInSession", sessionNameTracker);
             model.addAttribute("AdminId",admin.getId());
-            //model.addAttribute("adminInfo", admin);
         } else {
             model.addAttribute("message", "Օգտագործողի անունը կամ գաղտնաբառը սխալ է");
+            session.invalidate();
             return "admin/login/Login";
         }
         return "admin/index";
+    }
+
+    @RequestMapping(value = "/admin/Logout")
+    public String logOut(Model model, HttpSession session){
+        session.removeAttribute("NameInSession");
+        session.setAttribute("NameInSession",null);
+        session.invalidate();
+        model.addAttribute("message", "Հաջողությամբ դուրս եկաք կառավարման վահանակից");
+        return "Logout";
     }
 }

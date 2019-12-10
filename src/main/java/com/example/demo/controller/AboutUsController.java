@@ -11,9 +11,9 @@ public class AboutUsController {
     @Autowired
     private AboutUsServiceImpl aboutUsServiceImpl;
 
-    @RequestMapping()
+   /* @RequestMapping()
     public String getAboutUs(Model model) {
         model.addAttribute("AllAboutUs", aboutUsServiceImpl.showAll());
         return "JSP/index";
-    }
+    }*/
 }

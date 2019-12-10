@@ -115,7 +115,7 @@ to get the desired effect
                         <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Վարչակազմի վերահսկիչ
+                                ՎԱՐՉԱԿԱԶՄԻ ՎԵՐԱՀՍԿԻՉ
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -124,24 +124,19 @@ to get the desired effect
                                 <form action="${pageContext.request.contextPath}/admin/ChangePassword" method="post" name="changPassword">
                                        <a href="#" class="nav-link" onclick="document.changPassword.submit()">
                                            <i class="far fa-circle nav-icon"></i>
-                                           <p>Փոփոխեք մանրամասները</p>
+                                           <p>ՓՈԽԵԼ ԳԱՂՏՆԱԲԱՌԸ</p>
                                        </a>
                                     <input type="hidden" name="id" value="${requestScope.AdminId}">
                                     <input type="hidden" name="sessionAdmin" value="${sessionScope.NameInSession}">
                                 </form>
                             </li>
                             <li class="nav-item">
-                                <a href="./index2.html" class="nav-link">
+                                <a href="${pageContext.request.contextPath}/admin/Logout" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v2</p>
+                                    <p>ԵԼՔ</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="./index3.html" class="nav-link active">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v3</p>
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
                     <li class="nav-item">
