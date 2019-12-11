@@ -10,7 +10,6 @@ import java.util.Set;
 @Setter
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Document(collection = "Admin_User")
 public class Admin {
@@ -18,6 +17,12 @@ public class Admin {
     private String id;
     private String admin_username;
     private String admin_password;
+
+    public Admin(String id, String username, String password) {
+        this.id= id;
+        this.admin_username = username;
+        this.admin_password = password;
+    }
 
 
     public String getId() {
@@ -36,11 +41,4 @@ public class Admin {
         this.id = id;
     }
 
-    public void setAdmin_username(String admin_username) {
-        this.admin_username = admin_username;
-    }
-
-    public void setAdmin_password(String admin_password) {
-        this.admin_password = admin_password;
-    }
 }

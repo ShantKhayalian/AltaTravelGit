@@ -33,14 +33,14 @@
         $(document).ready(function () {
             window.setTimeout(function () {
                 window.location.href = "${pageContext.request.contextPath}/"
-            }, 5000);
+            }, 4000);
         });
     </script>
     <script type="text/javascript">
         $(document).ready(function(){
             $("div").animate({
                 width: "100%"
-            },5000);
+            },4000);
 
         });
     </script>

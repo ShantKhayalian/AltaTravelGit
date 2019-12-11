@@ -35,14 +35,16 @@
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Մուտք գործեք սկսելու համար</p>
-            <%
-                if (request.getAttribute("message") != null) {
-            %>
-            <%=request.getAttribute("message")%>
-            <%
-                }
-            %>
+            <p class="login-box-msg">Մուտք գործեք սկսելու համար
+                <br> <br>
+                <%
+                    if (request.getAttribute("message") != null) {
+                %>
+                <%=request.getAttribute("message")%>
+                <%
+                    }
+                %>
+            </p>
             <form action="${pageContext.request.contextPath}/admin/Login" method="post">
                 <div class="input-group mb-3">
                     <input type="text" name="username" class="form-control" placeholder="Օգտագործողի անունը" required>

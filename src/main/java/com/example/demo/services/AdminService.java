@@ -11,6 +11,8 @@ public interface AdminService {
     Admin loadAdmin(String Username, String password);
     List<Admin> findAllAdminDetail();
     Optional<Admin> getAdminById(String id);
+    void updateAdminPassword(String password, String id);
+    Admin findById(String id);
    /* Admin findByFirstName(String firstName);*/
   /*  List<Admin> findByLastName(String lastName);
     List<Admin> showAll();

@@ -3,6 +3,8 @@ package com.example.demo.services;
 import com.example.demo.model.Admin;
 import com.example.demo.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,16 +19,16 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Admin loadAdmin(String Username, String password) {
         List<Admin> adminList = findAllAdminDetail();
-        if(adminList == null || adminList.isEmpty()){
+        if (adminList == null || adminList.isEmpty()) {
             throw new NullPointerException(Username);
-        }else{
-           return getAmin(Username,password,adminList);
+        } else {
+            return getAmin(Username, password, adminList);
         }
     }
 
-    private Admin getAmin(String username,String password, List<Admin> AdminListToCheck) {
-        for(Admin element : AdminListToCheck){
-            if(element.getAdmin_username().equals(username) && element.getAdmin_password().equals(password)){
+    private Admin getAmin(String username, String password, List<Admin> AdminListToCheck) {
+        for (Admin element : AdminListToCheck) {
+            if (element.getAdmin_username().equals(username) && element.getAdmin_password().equals(password)) {
                 return element;
             }
         }
@@ -41,5 +43,19 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Optional<Admin> getAdminById(String id) {
         return adminRepository.findById(id);
+    }
+
+    @Override
+    public void updateAdminPassword(String password, String id) {
+        Admin admin = adminRepository.findAllById(id);
+        String username = admin.getAdmin_username();
+        admin = new Admin(id,username, password);
+        adminRepository.save(admin);
+
+    }
+
+    @Override
+    public Admin findById(String id) {
+        return adminRepository.findAllById(id);
     }
 }

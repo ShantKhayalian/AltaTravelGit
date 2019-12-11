@@ -42,10 +42,10 @@ public class AdminController {
     }
 
     @PostMapping(value = "/admin/ChangePassword")
-    public String changePass(@RequestParam String id, @RequestParam String sessionAdmin, Model model,HttpSession session) {
+    public String changePass(@RequestParam String id, @RequestParam String sessionAdmin, Model model, HttpSession session) {
         Optional<Admin> admin = adminServiceimpl.getAdminById(id);
-        if (admin != null && session.getAttribute("NameInSession").equals(sessionAdmin)) {
-            model.addAttribute("adminFullList", admin);
+        if (id.equals(admin.get().getId())) {
+            model.addAttribute("AdminId", admin.get().getId());
             return "admin/ChangePassword";
         } else {
             session.invalidate();
@@ -56,13 +56,20 @@ public class AdminController {
 
     }
 
+    @PostMapping(value="/admin/UpdatePassword")
+    public String updatePassword(@RequestParam String newPassword, @RequestParam String id,Model model){
+        adminServiceimpl.updateAdminPassword(newPassword,id);
+        model.addAttribute("message", "\n\nԴուք հաջողությամբ փոխիք ձեր գաղտնաբառը,\n\n նորից մուտք գործեք");
+        return "admin/login/Login";
+    }
+
     @PostMapping(value = "/admin/Login")
     public String loginCheck(@RequestParam String username, @RequestParam String Password, Model model, HttpSession session) {
         Admin admin = adminServiceimpl.loadAdmin(username, Password);
         if (admin != null) {
             String sessionNameTracker = admin.getAdmin_username();
             session.setAttribute("NameInSession", sessionNameTracker);
-            model.addAttribute("AdminId",admin.getId());
+            model.addAttribute("AdminId", admin.getId());
         } else {
             model.addAttribute("message", "Օգտագործողի անունը կամ գաղտնաբառը սխալ է");
             session.invalidate();
@@ -72,9 +79,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/Logout")
-    public String logOut(Model model, HttpSession session){
+    public String logOut(Model model, HttpSession session) {
         session.removeAttribute("NameInSession");
-        session.setAttribute("NameInSession",null);
+        session.setAttribute("NameInSession", null);
         session.invalidate();
         model.addAttribute("message", "Հաջողությամբ դուրս եկաք կառավարման վահանակից");
         return "Logout";
