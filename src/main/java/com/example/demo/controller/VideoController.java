@@ -21,6 +21,8 @@ public class VideoController {
     public String photo(){
         return "JSP/uploadVideo";
     }
+
+
     @PostMapping("/videos/add")
     public String addVideo(@RequestParam("title") String title, @RequestParam("file") MultipartFile file, Model model) throws IOException {
         String id = videoService.addVideo(title, file);
