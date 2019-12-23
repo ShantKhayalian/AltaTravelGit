@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Objects;
+
 @Service
 public class VideoService {
 
@@ -35,7 +37,7 @@ public class VideoService {
     public Video getVideo(String id) throws IllegalStateException, IOException {
         GridFSFile file = gridFsTemplate.findOne(new Query(Criteria.where("_id").is(id)));
         Video video = new Video();
-        video.setTitle(file.getMetadata().get("title").toString());
+        video.setTitle(Objects.requireNonNull(Objects.requireNonNull(file).getMetadata()).get("title").toString());
         video.setStream(operations.getResource(file).getInputStream());
         return video;
     }
