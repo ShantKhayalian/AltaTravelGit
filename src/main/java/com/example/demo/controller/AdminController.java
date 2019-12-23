@@ -35,6 +35,7 @@ public class AdminController {
         return "admin/SignIn";
     }
 
+
     @RequestMapping("/admin/fullDetail")
     public String showAdmin(Model model) {
         model.addAttribute("FullAdminDetail", adminServiceimpl.findAllAdminDetail());
