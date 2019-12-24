@@ -43,16 +43,15 @@ public class AdminController {
     }
 
     @PostMapping(value = "/admin/ChangePassword")
-    public String changePass(@RequestParam String id, @RequestParam String sessionAdmin, Model model, HttpSession session) {
+    public String changePass(@RequestParam String id, Model model, HttpSession session) {
         Optional<Admin> admin = adminServiceimpl.getAdminById(id);
         if (id.equals(admin.get().getId())) {
             model.addAttribute("AdminId", admin.get().getId());
             return "admin/ChangePassword";
         } else {
             session.invalidate();
-            model.addAttribute("message", "Անվտանգության ազդանշան,\n" +
-                    "\nեթե դուք չեք ադմինիստրատոր օգտագործող, \n\nխնդրում ենք մի փորձեք մուտք գործել");
-            return "admin/login/Login";
+            model.addAttribute("message", "Security alarm,\n\n if you are not an administrator, \n\n please do not try to log in");
+            return "admin/Login";
         }
 
     }
@@ -60,8 +59,8 @@ public class AdminController {
     @PostMapping(value="/admin/UpdatePassword")
     public String updatePassword(@RequestParam String newPassword, @RequestParam String id,Model model){
         adminServiceimpl.updateAdminPassword(newPassword,id);
-        model.addAttribute("message", "\n\nԴուք հաջողությամբ փոխիք ձեր գաղտնաբառը,\n\n նորից մուտք գործեք");
-        return "admin/login/Login";
+        model.addAttribute("message", "\n\nYou have successfully changed your password,\n\n  sign in again");
+        return "admin/Login";
     }
 
     @PostMapping(value = "/admin/Login")
@@ -72,9 +71,9 @@ public class AdminController {
             session.setAttribute("NameInSession", sessionNameTracker);
             model.addAttribute("AdminId", admin.getId());
         } else {
-            model.addAttribute("message", "Օգտագործողի անունը կամ գաղտնաբառը սխալ է");
+            model.addAttribute("message", "Invalid username or password");
             session.invalidate();
-            return "admin/login/Login";
+            return "admin/Login";
         }
         return "admin/index";
     }
@@ -84,7 +83,7 @@ public class AdminController {
         session.removeAttribute("NameInSession");
         session.setAttribute("NameInSession", null);
         session.invalidate();
-        model.addAttribute("message", "Հաջողությամբ դուրս եկաք կառավարման վահանակից");
+        model.addAttribute("message", "You have successfully exited the dashboard");
         return "Logout";
     }
 }

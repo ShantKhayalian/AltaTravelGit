@@ -51,7 +51,6 @@ public class AdminServiceImpl implements AdminService {
         String username = admin.getAdmin_username();
         admin = new Admin(id,username, password);
         adminRepository.save(admin);
-
     }
 
     @Override
